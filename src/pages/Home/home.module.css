@@ -1,0 +1,54 @@
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  color: #fff;
+}
+
+.movie-list {
+  width: 50rem;
+  margin: 0.875rem auto;
+}
+
+.movie-list article {
+  width: 100%;
+  background-color: #f3f3f3;
+  padding: 1rem;
+  margin-top: 0.5rem;
+}
+
+.movie-list strong {
+  margin-bottom: 0.875rem;
+  text-align: center;
+  font-size: 1.25rem;
+  display: block;
+}
+
+.movie-list img {
+  width: 900px;
+  max-width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  display: block;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.movie-list a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  font-size: 1.5rem;
+  text-decoration: none;
+  background-color: #db0000;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.movie-list a:hover {
+  background-color: #831010;
+}

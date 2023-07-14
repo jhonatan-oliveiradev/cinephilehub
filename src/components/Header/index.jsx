@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 
-import "./header.module.scss";
+import styles from "./header.module.css";
 
 export default function Header() {
 	return (
 		<header>
-			<Link to="/" className="logo">
+			<Link to="/" className={styles.logo}>
 				Primeflix
 			</Link>
-			<Link to="/movie/:id" className="favorites">
+			<Link to="/movie/:id" className={styles.favorites}>
 				Meus filmes
 			</Link>
 		</header>

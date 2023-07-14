@@ -4,8 +4,25 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #db0000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #831010;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
+  background-color: #181813;
 }
 
 .app {
