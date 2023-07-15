@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import api from "../../services/api";
-
-import styles from "./home.module.css";
 import { Link } from "react-router-dom";
+
+import Loader from "../../components/Loader";
+import api from "../../services/api";
+import styles from "./home.module.css";
 
 export default function Home() {
 	const [movies, setMovies] = useState([]);
@@ -40,11 +41,7 @@ export default function Home() {
 	}, [movies]);
 
 	if (loading) {
-		return (
-			<div className={styles.loading}>
-				<h1>Carregando filmes...</h1>
-			</div>
-		);
+		return <Loader />;
 	}
 
 	return (

@@ -1,0 +1,92 @@
+.movie-info {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	margin-top: 18px;
+	padding: 0 8px;
+	max-width: 800px;
+	color: #fff;
+}
+
+.movie-info h1 {
+	margin: 14px 0;
+}
+
+.movie-info img {
+	width: 800px;
+	max-width: 100%;
+	border-radius: 8px;
+	max-height: 340px;
+	object-fit: cover;
+}
+
+.movie-info h3,
+.movie-info h4 {
+	margin-top: 14px;
+}
+
+.genre {
+	color: #cfd8dc;
+	font-style: italic;
+	font-weight: 200;
+}
+
+.inner-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 14px 0;
+}
+
+.inner-info svg {
+	margin-top: 6px;
+}
+
+.rating,
+.release-date,
+.budget,
+.profit {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.area-buttons {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.area-buttons button {
+	margin-right: 12px;
+	margin-top: 14px;
+	margin-left: 0;
+	font-size: 1.25rem;
+	cursor: pointer;
+	padding: 12px;
+	color: #f3f3f3;
+
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	border: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.area-buttons a {
+	text-decoration: none;
+	color: #fff;
+}
+
+.area-buttons button,
+.area-buttons a {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s ease-in-out;
+}
+
+.area-buttons button:hover {
+	background: rgba(255, 255, 255, 0.1);
+}
