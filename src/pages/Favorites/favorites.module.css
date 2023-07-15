@@ -1,0 +1,57 @@
+.my-movies {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.my-movies h1 {
+  margin-bottom: 14px;
+  color: #f3f3f3;
+}
+
+.my-movies span {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #f3f3f3;
+}
+
+.my-movies ul {
+  width: 720px;
+}
+
+.my-movies ul li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.my-movies div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons {
+  gap: 1rem;
+}
+
+.buttons a {
+  text-decoration: none;
+  border: 1px solid #00e4a0;
+  border-radius: 4px;
+}
+
+.buttons a,
+.buttons button {
+  cursor: pointer;
+}
+
+.buttons button {
+  background: none;
+  border: none;
+  outline: none;
+}

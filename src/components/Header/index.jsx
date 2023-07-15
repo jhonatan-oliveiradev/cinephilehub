@@ -8,7 +8,7 @@ export default function Header() {
 			<Link to="/" className={styles.logo}>
 				<img src={logoImg} alt="Cinephilehub - Para quem ama filmes." />
 			</Link>
-			<Link to="/movie/:id" className={styles.favorites}>
+			<Link to="/favorites" className={styles.favorites}>
 				Meus filmes
 			</Link>
 		</header>

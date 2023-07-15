@@ -25,7 +25,7 @@ export default function Movie() {
 					params: {
 						api_key: import.meta.env.VITE_API_KEY,
 						language: "pt-BR",
-						append_to_response: "credits" // Adiciona os créditos do filme à resposta
+						append_to_response: "credits"
 					}
 				});
 
@@ -85,7 +85,7 @@ export default function Movie() {
 			return;
 		}
 
-		savedMovies.push({ id: movie.id });
+		savedMovies.push({ id: movie.id, title: movie.title });
 		localStorage.setItem("@cinephilehub", JSON.stringify(savedMovies));
 		toast.success(`Filme adicionado à sua lista!`, {
 			style: {
@@ -100,7 +100,6 @@ export default function Movie() {
 			}
 		});
 
-		console.log(savedMovies);
 		setInMyList(true);
 	}
 
