@@ -25,7 +25,15 @@
 	margin-top: 14px;
 }
 
-.genre {
+.middle-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.genre,
+.director,
+.cast {
 	color: #cfd8dc;
 	font-style: italic;
 	font-weight: 200;

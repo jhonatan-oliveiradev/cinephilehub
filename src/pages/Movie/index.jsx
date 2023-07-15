@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaPlus, FaPlay, FaMoneyBillWave } from "react-icons/fa";
@@ -8,6 +9,7 @@ import { PiRocketLaunch } from "react-icons/pi";
 import api from "../../services/api";
 import Loader from "../../components/Loader";
 import styles from "./movie.module.css";
+import { toast } from "react-hot-toast";
 
 export default function Movie() {
 	const { id } = useParams();
@@ -17,22 +19,29 @@ export default function Movie() {
 
 	useEffect(() => {
 		async function loadMovie() {
-			await api
-				.get(`/movie/${id}`, {
+			try {
+				const response = await api.get(`/movie/${id}`, {
 					params: {
 						api_key: import.meta.env.VITE_API_KEY,
-						language: "pt-BR"
+						language: "pt-BR",
+						append_to_response: "credits" // Adiciona os créditos do filme à resposta
 					}
-				})
-				.then((response) => {
-					setMovie(response.data);
-					setLoading(false);
-				})
-				.catch((err) => {
-					console.log("Filme não encontrado" + err);
-					navigate("/", { replace: true });
-					return;
 				});
+
+				setMovie(response.data);
+				setLoading(false);
+			} catch (error) {
+				console.log("Filme não encontrado", error);
+				toast.error(`Filme não encontrado! \n Retornando à Página inicial`, {
+					style: {
+						borderRadius: 10,
+						backgroundColor: "#18181b",
+						color: "#f3f3f3",
+						border: `solid #181818`
+					}
+				});
+				navigate("/", { replace: true });
+			}
 		}
 
 		loadMovie();
@@ -40,7 +49,7 @@ export default function Movie() {
 		return () => {
 			console.log("Componente foi desmontado");
 		};
-	}, [id]);
+	}, [id, navigate]);
 
 	if (loading) {
 		return <Loader />;
@@ -56,11 +65,43 @@ export default function Movie() {
 			<h3>Sinopse:</h3>
 			<span>{movie.overview}</span>
 
-			<h4>Gênero:</h4>
-			<span className={styles.genre}>
-				{movie.genres !== undefined &&
-					movie.genres.map((genre) => genre.name).join(", ")}
-			</span>
+			<div className={styles["middle-info"]}>
+				<div>
+					<h4>Gênero:</h4>
+					<span className={styles.genre}>
+						{movie.genres !== undefined &&
+							movie.genres
+								.map((genre) => genre.name)
+								.slice(0, 3)
+								.join(", ")}
+					</span>
+				</div>
+
+				<div>
+					<h4>Elenco:</h4>
+					<span className={styles.cast}>
+						{movie.credits && movie.credits.cast
+							? movie.credits.cast
+									.slice(0, 2)
+									.map((cast) => cast.name)
+									.join(", ")
+							: "Não informado"}
+					</span>
+				</div>
+
+				<div>
+					<h4>Direção:</h4>
+					<span className={styles.director}>
+						{movie.credits && movie.credits.crew
+							? movie.credits.crew
+									.filter((person) => person.job === "Director")
+									.slice(0, 1)
+									.map((director) => director.name)
+									.join(", ")
+							: "Não informado"}
+					</span>
+				</div>
+			</div>
 
 			<div className={styles["inner-info"]}>
 				{movie.vote_average !== undefined && (
@@ -105,7 +146,6 @@ export default function Movie() {
 							? new Intl.NumberFormat("pt-BR", {
 									style: "currency",
 									currency: "BRL"
-									// eslint-disable-next-line no-mixed-spaces-and-tabs
 							  }).format(movie.budget)
 							: "Não informado"}
 					</span>
@@ -124,7 +164,6 @@ export default function Movie() {
 							? new Intl.NumberFormat("pt-BR", {
 									style: "currency",
 									currency: "BRL"
-									// eslint-disable-next-line no-mixed-spaces-and-tabs
 							  }).format(movie.revenue)
 							: "Não informado"}
 					</span>
@@ -137,7 +176,11 @@ export default function Movie() {
 					<FaPlus size={18} />
 				</button>
 				<button>
-					<a href="#">
+					<a
+						href={`https://youtube.com/results?search_query=${movie.title} Trailer`}
+						target="_blank"
+						rel="noreferrer"
+					>
 						Trailer
 						<FaPlay size={18} />
 					</a>
