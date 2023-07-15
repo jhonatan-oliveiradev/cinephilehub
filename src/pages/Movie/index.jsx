@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { FaPlus, FaPlay, FaMoneyBillWave } from "react-icons/fa";
+import { FaPlus, FaPlay, FaMoneyBillWave, FaCheck } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 import { TbPigMoney } from "react-icons/tb";
 import { PiRocketLaunch } from "react-icons/pi";
@@ -16,6 +16,7 @@ export default function Movie() {
 	const navigate = useNavigate();
 	const [movie, setMovie] = useState({});
 	const [loading, setLoading] = useState(true);
+	const [inMyList, setInMyList] = useState(false);
 
 	useEffect(() => {
 		async function loadMovie() {
@@ -30,6 +31,7 @@ export default function Movie() {
 
 				setMovie(response.data);
 				setLoading(false);
+				checkIfInMyList(response.data);
 			} catch (error) {
 				console.log("Filme não encontrado", error);
 				toast.error(`Filme não encontrado! \n Retornando à Página inicial`, {
@@ -50,6 +52,81 @@ export default function Movie() {
 			console.log("Componente foi desmontado");
 		};
 	}, [id, navigate]);
+
+	function checkIfInMyList(movie) {
+		const myList = localStorage.getItem("@cinephilehub");
+		const savedMovies = JSON.parse(myList) || [];
+
+		const hasMovie = savedMovies.some(
+			(savedMovie) => savedMovie.id === movie.id
+		);
+
+		setInMyList(hasMovie);
+	}
+
+	function saveMovie() {
+		const myList = localStorage.getItem("@cinephilehub");
+
+		let savedMovies = JSON.parse(myList) || [];
+
+		const hasMovie = savedMovies.some(
+			(savedMovie) => savedMovie.id === movie.id
+		);
+
+		if (hasMovie) {
+			toast.error(`Filme já está na sua lista!`, {
+				style: {
+					borderRadius: 10,
+					backgroundColor: "#18181b",
+					color: "#f3f3f3",
+					border: `solid #181818`
+				}
+			});
+			return;
+		}
+
+		savedMovies.push({ id: movie.id });
+		localStorage.setItem("@cinephilehub", JSON.stringify(savedMovies));
+		toast.success(`Filme adicionado à sua lista!`, {
+			style: {
+				borderRadius: 10,
+				backgroundColor: "#18181b",
+				color: "#f3f3f3",
+				border: `solid #181818`
+			},
+			iconTheme: {
+				primary: "#00e4a0",
+				secondary: "#f3f3f3"
+			}
+		});
+
+		console.log(savedMovies);
+		setInMyList(true);
+	}
+
+	function removeFromMyList() {
+		const myList = localStorage.getItem("@cinephilehub");
+		let savedMovies = JSON.parse(myList) || [];
+
+		savedMovies = savedMovies.filter(
+			(savedMovie) => savedMovie.id !== movie.id
+		);
+		localStorage.setItem("@cinephilehub", JSON.stringify(savedMovies));
+		toast.success(`Filme removido da sua lista!`, {
+			style: {
+				borderRadius: 10,
+				backgroundColor: "#18181b",
+				color: "#f3f3f3",
+				border: `solid #181818`
+			},
+			iconTheme: {
+				primary: "#00e4a0",
+				secondary: "#f3f3f3"
+			}
+		});
+
+		setInMyList(false);
+	}
 
 	if (loading) {
 		return <Loader />;
@@ -171,10 +248,15 @@ export default function Movie() {
 			</div>
 
 			<div className={styles["area-buttons"]}>
-				<button>
-					Minha lista
-					<FaPlus size={18} />
-				</button>
+				{inMyList ? (
+					<button onClick={removeFromMyList}>
+						Minha lista <FaCheck size={18} />
+					</button>
+				) : (
+					<button onClick={saveMovie}>
+						Minha lista <FaPlus size={18} />
+					</button>
+				)}
 				<button>
 					<a
 						href={`https://youtube.com/results?search_query=${movie.title} Trailer`}
