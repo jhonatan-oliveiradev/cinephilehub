@@ -27,6 +27,7 @@
 ## 📖 Sobre o projeto
 
 O projeto **Cinephilehub** é uma aplicação web desenvolvida com React.js e Vite, que consome a API do [The Movie Database](https://www.themoviedb.org/) para exibir informações sobre filmes, séries e atores.
+Listagem de filmes mais relevantes, pesquisa de filmes, roteamento, Minha Lista, detalhes de um filme e carregamento dinâmico são algumas funcionalidades desta aplicação.
 
 ## 💻 Tecnologias utilizadas no projeto
 
