@@ -61,11 +61,11 @@ O projeto está estruturado da seguinte forma:
     - 📁 `Favorites`
     - 📁 `Error`
   - 📁 `components`
-  - 📁 `Header`
-  - 📁 `Loader`
-  - ⚛️ `App.jsx`
-  - ⚛️ `main.jsx`
-  - ⚛️ `routes.jsx`
+    - 📁 `Header`
+    - 📁 `Loader`
+- ⚛️ `App.jsx`
+- ⚛️ `main.jsx`
+- ⚛️ `routes.jsx`
 
 ## 🛠️ Instruções de execução
 
