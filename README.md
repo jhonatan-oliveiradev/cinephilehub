@@ -63,9 +63,9 @@ O projeto está estruturado da seguinte forma:
   - 📁 `components`
     - 📁 `Header`
     - 📁 `Loader`
-- ⚛️ `App.jsx`
-- ⚛️ `main.jsx`
-- ⚛️ `routes.jsx`
+  - ⚛️ `App.jsx`
+  - ⚛️ `main.jsx`
+  - ⚛️ `routes.jsx`
 
 ## 🛠️ Instruções de execução
 
